@@ -2,14 +2,19 @@
 
 import React from "react";
 import Image from "next/image";
+import { LayoutGrid } from "lucide-react";
 
 export interface SubCategoryItem {
   id: string;
   name: string;
-  icon: string;
+  icon?: string;
 }
 
 export const SUB_CATEGORIES: SubCategoryItem[] = [
+  {
+    id: "all",
+    name: "ALL",
+  },
   {
     id: "gta-vi",
     name: "GTA VI",
@@ -68,15 +73,29 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeId, onSelect }) => {
               }`}
               aria-pressed={isSelected}
             >
-              <div className="w-11 h-11 mb-1.5 flex items-center justify-center shrink-0">
-                <Image
-                  src={item.icon}
-                  alt={item.name}
-                  width={44}
-                  height={44}
-                  className="object-contain p-0.5 h-11 w-11"
-                />
-              </div>
+              {item.id === "all" ? (
+                <div
+                  className={`w-11 h-11 mb-1.5 flex items-center justify-center rounded-lg ${
+                    isSelected
+                      ? "bg-sky-100/60 text-[#0091ff]"
+                      : "bg-purple-50 text-purple-700"
+                  }`}
+                >
+                  <LayoutGrid className="w-5 h-5" />
+                </div>
+              ) : (
+                <div className="w-11 h-11 mb-1.5 flex items-center justify-center shrink-0">
+                  {item.icon && (
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      width={44}
+                      height={44}
+                      className="object-contain p-0.5 h-11 w-11"
+                    />
+                  )}
+                </div>
+              )}
               <span className="text-[11px] leading-tight line-clamp-2 max-w-[80px]">
                 {item.name}
               </span>
