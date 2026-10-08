@@ -1,6 +1,6 @@
 # SharePal UI Clone — Software Engineer Assessment
 
-A production-ready, highly interactive frontend clone of SharePal's **"Gaming Gadgets on Rent"** page, built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS**.
+A highly interactive frontend clone of SharePal's **"Gaming Gadgets on Rent"** page, built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS**.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.4.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.0.0-blue?style=for-the-badge&logo=react)](https://react.dev/)
