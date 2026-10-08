@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   MapPin,
   Calendar,
@@ -48,7 +49,7 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
         {/* Left: Official SharePal Logo Tab */}
         <div className="flex items-start shrink-0 h-full">
-          <a
+          <Link
             href="/"
             aria-label="SharePal Homepage"
             className="logo flex h-11 flex-col items-center justify-end gap-1 rounded-bl-xl rounded-br-xl bg-[#1945e8] px-3 pb-1.5 pt-2 transition hover:bg-[#1437b8] focus:outline-hidden shadow-xs"
@@ -87,7 +88,7 @@ export const Header: React.FC = () => {
                 />
               </svg>
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* Center: Search & Booking details Pill */}

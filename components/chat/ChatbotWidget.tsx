@@ -47,6 +47,7 @@ export const ChatbotWidget: React.FC = () => {
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messageIdRef = useRef(10);
 
   useEffect(() => {
     if (isOpen) {
@@ -59,7 +60,7 @@ export const ChatbotWidget: React.FC = () => {
     if (!text.trim()) return;
 
     const userMsg: Message = {
-      id: Date.now().toString(),
+      id: `msg-${++messageIdRef.current}`,
       sender: "user",
       text,
       time: "Just now",
@@ -88,7 +89,7 @@ export const ChatbotWidget: React.FC = () => {
       setMessages((prev) => [
         ...prev,
         {
-          id: (Date.now() + 1).toString(),
+          id: `msg-${++messageIdRef.current}`,
           sender: "agent",
           text: reply,
           time: "Just now",

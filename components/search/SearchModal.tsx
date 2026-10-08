@@ -38,12 +38,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({ products }) => {
   // Focus input on open
   useEffect(() => {
     if (isSearchOpen) {
-      setInputVal(searchQuery);
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
+      return () => clearTimeout(timer);
     }
-  }, [isSearchOpen, searchQuery]);
+  }, [isSearchOpen]);
 
   // Handle ESC key
   useEffect(() => {

@@ -25,6 +25,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     product;
   const { rentalDays, toggleFavorite, isFavorite } = useRental();
 
+  // Lead capture state for "Notify Me When Available"
+  const [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false);
+  const [contactInfo, setContactInfo] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   // If this product is tagged for crowd-voting waitlist, render the VoteToLaunchCard
   if (tag === "Vote to Launch") {
     return <VoteToLaunchCard product={product} isPriority={isPriority} />;
@@ -32,11 +37,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   // Calculated dynamic total rental price
   const totalRentalPrice = per_day_rent * rentalDays;
-
-  // Lead capture state for "Notify Me When Available"
-  const [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false);
-  const [contactInfo, setContactInfo] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleNotifySubmit = (e: React.FormEvent) => {
     e.preventDefault();
