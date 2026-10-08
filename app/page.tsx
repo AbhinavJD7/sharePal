@@ -72,7 +72,7 @@ export default async function Page() {
       <Header />
 
       {/* 2. Horizontal Category Navigation */}
-      <CategoryNav currentCategory="gaming" />
+      <CategoryNav />
 
       {/* 3. Main Two-Column Layout (Sidebar + Hero + Dynamic Product Grid) */}
       <MainContentLayout initialProducts={products} />

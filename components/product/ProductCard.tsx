@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Info, Star, BellRing, Check, X } from "lucide-react";
+import { Info, Star, BellRing, Check, X, Heart } from "lucide-react";
 import { IProduct } from "@/types/product";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { formatCurrency } from "@/lib/utils";
 import { useRental } from "@/context/RentalContext";
+import { VoteToLaunchCard } from "@/components/product/VoteToLaunchCard";
 
 interface ProductCardProps {
   product: IProduct;
@@ -22,7 +23,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { name, image, rating, booked_count, tag, per_day_rent, out_of_stock } =
     product;
-  const { rentalDays } = useRental();
+  const { rentalDays, toggleFavorite, isFavorite } = useRental();
+
+  // If this product is tagged for crowd-voting waitlist, render the VoteToLaunchCard
+  if (tag === "Vote to Launch") {
+    return <VoteToLaunchCard product={product} isPriority={isPriority} />;
+  }
 
   // Calculated dynamic total rental price
   const totalRentalPrice = per_day_rent * rentalDays;
@@ -56,6 +62,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <Badge variant="outline-blue">{tag}</Badge>
               </div>
             )}
+
+            {/* Favourites Heart Button (Reveals on Hover) */}
+            <button
+              type="button"
+              onClick={() => toggleFavorite(product)}
+              className={`absolute top-2 right-2 z-10 p-1.5 rounded-full bg-white/90 backdrop-blur-xs text-gray-400 hover:text-red-500 transition-all duration-200 cursor-pointer shadow-xs ${
+                isFavorite(product.id)
+                  ? "opacity-100 text-red-500"
+                  : "opacity-0 group-hover:opacity-100"
+              }`}
+              aria-label={`Save ${name} to favourites`}
+            >
+              <Heart
+                className={`w-4 h-4 transition-colors ${
+                  isFavorite(product.id)
+                    ? "fill-red-500 text-red-500"
+                    : "text-gray-400"
+                }`}
+              />
+            </button>
 
             {/* Product Image with smooth hover scale */}
             <div className="relative w-full h-full" style={{ position: "relative" }}>
