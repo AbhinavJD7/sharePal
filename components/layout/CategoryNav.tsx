@@ -1,11 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-
-interface CategoryNavProps {
-  currentCategory?: string;
-  onSelectCategory?: (category: string) => void;
-}
+import React from "react";
+import { useRental } from "@/context/RentalContext";
 
 const CATEGORIES = [
   { id: "photography", label: "Photography" },
@@ -14,16 +10,8 @@ const CATEGORIES = [
   { id: "entertainment", label: "Entertainment" },
 ];
 
-export const CategoryNav: React.FC<CategoryNavProps> = ({
-  currentCategory = "gaming",
-  onSelectCategory,
-}) => {
-  const [active, setActive] = useState(currentCategory);
-
-  const handleSelect = (id: string) => {
-    setActive(id);
-    onSelectCategory?.(id);
-  };
+export const CategoryNav: React.FC = () => {
+  const { mainCategory, setMainCategory } = useRental();
 
   return (
     <nav
@@ -33,12 +21,12 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ul className="flex items-center justify-center sm:justify-start gap-8 sm:gap-14 overflow-x-auto no-scrollbar text-sm font-semibold">
           {CATEGORIES.map((cat) => {
-            const isActive = active === cat.id;
+            const isActive = mainCategory === cat.id;
             return (
               <li key={cat.id} className="shrink-0">
                 <button
                   type="button"
-                  onClick={() => handleSelect(cat.id)}
+                  onClick={() => setMainCategory(cat.id)}
                   className={`py-3.5 relative transition-colors duration-150 cursor-pointer ${
                     isActive
                       ? "text-[#4e1173]"
