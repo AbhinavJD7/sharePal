@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { RentalProvider } from "@/context/RentalContext";
+import { CartDrawer } from "@/components/cart/CartDrawer";
+import { FavoritesDrawer } from "@/components/favorites/FavoritesDrawer";
+import { ChatbotWidget } from "@/components/chat/ChatbotWidget";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -28,7 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-[#fcfcfc] text-gray-900">
-        <RentalProvider>{children}</RentalProvider>
+        <RentalProvider>
+          {children}
+          <CartDrawer />
+          <FavoritesDrawer />
+          <ChatbotWidget />
+        </RentalProvider>
       </body>
     </html>
   );
